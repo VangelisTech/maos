@@ -1,0 +1,466 @@
+multi-agent-framework/
+│
+├── api/
+│   ├── __init__.py
+│   ├── main.py                # Entry point to the app, includes app creation and middleware
+│   ├── dependencies.py        # Dependency injection and utilities
+│   ├── config.py              # Configuration management
+│   ├── oauth.py               # OAuth configuration and routines
+│   ├── v1/
+│   │   ├── __init__.py
+│   │   ├── auth.py            # Router for authentication routes
+│   │   ├── session.py         # User, Account, and Session routes
+│   │   ├── agents.py          # Agent routes
+│   │   ├── models.py          # Model Inference
+│   │   ├── agents.py          # Agent routes
+
+
+│   ├── clients/
+│   │   ├── python/
+│   │   │   ├── __init__.py
+│   │   │   └── client.py      # Python client for API
+│   │   ├── typescript/
+│   │   │   ├── index.ts       # TypeScript client for API
+│   │   │   └── utils.ts
+│   │   └── go/
+│   │       ├── client.go      # Go client for API
+│   │       └── utils.go
+│
+├── core/
+│ ├── data/
+│ │ ├── pipelines/
+│ │ ├── schema/ (Business Ontology)
+│ │ ├── types/  (Data Types)
+
+
+
+│ ├── models/
+│ ├── tools/
+│ ├── agents/
+│ ├── orchestration/
+
+
+ocr
+
+
+│ │ │ ├── extract/
+│ │ │ ├── load/
+│ │ │ ├── transform/
+
+
+│ │ │ ├── postprocessing/
+│ │ │ │ ├── artifacts/
+
+│ │ │ ├── segmentation/
+
+│ │ │ ├── feature_extraction/
+
+│ │ │ │ ├── artifacts/
+│ │ │ │ ├── nodes/
+│ │ │ │ ├── documents/
+│ │ │ │ ├── graphs/
+│ │ │ │ ├── artifacts/
+
+│ │ │ ├── ingestion/
+│ │ │ ├── preprocessing/
+│ │ │ ├── analysis/
+│ │ │ ├── decision/
+│ │ │ ├── action/
+
+│ │ │ ├── model_training/
+│ │ │ ├── model_evaluation/
+
+
+patterns
+
+
+│ ├── schema/
+│ │ ├── business/
+│ │ ├── types/
+
+│ │ ├── /
+│ │ │ ├── base_model.py # Base class for all domain object models.py # Base class for all domain object models
+│ │ │ ├── artifact.py # Any Raw File. Gzipped in Object store and indexed against account id and user id in iceberg
+│ │ │ ├── model.py
+│ │ │ ├── function.py
+│ │ │ ├── volume.py
+
+
+│ │ │ ├── document.py # Base Document. Indexed against account id and user id in iceberg
+│ │ │ ├── graph.py # Base Graph. Indexed against account id and user id in iceberg
+│ │ │ ├── node.py # Base Node. Indexed against account id and user id in iceberg
+│ │ ├── nodes/
+│ │ │ ├── base/
+│ │ │ │ ├── text.py # String Node
+│ │ │ │ ├── patch.py # Image Node
+│ │ │ │ ├── sample.py # Audio Node
+│ │ │ │ ├── clip.py # Video Node
+│ │ │ │ ├── snippet.py # Code Node
+│ │ │ │ ├── embedding.py # Embedding Node
+│ │ │ │ ├── vector.py # Vector Node
+│ │ │ ├──  graph/
+│ │ │ ├── table/
+
+│ │ ├── indices/
+│ │ │ ├── nodes/
+│ │ │ │ ├── index.py
+│ │ │ │ ├── text_index.py
+│ │ │ │ ├── patch_index.py
+│ │ │ │ ├── sample_index.py
+│ │ │ │ ├── clip_index.py
+│ │ │ │ ├── code_snippet_index.py
+│ │ │ │ ├── vector_index.py
+│ │ │ │ ├── vector_index.py
+│ │ │ │ ├── triplet_index.py
+│ │ │ ├── documents/
+│ │ │ │ ├── text/
+│ │ │ │ ├── image/
+│ │ │ │ ├── audio/
+│ │ │ │ ├── video/
+│ │ │ │ ├── code/
+
+
+│ │ │ │ ├── document_index.py
+│ │ │ │ ├── summary_index.py
+│ │ │ │ ├── title_index.py
+│ │ │ │ ├── keyword_index.py
+│ │ │ │ ├── tag_index.py
+│ │ │ │ ├── category_index.py
+│ │ │ │ ├── author_index.py
+│ │ │ │ ├── source_index.py
+│ │ │ │ ├── reference_index.py
+│ │ │ │ ├── citation_index.py
+
+│ │ ├── segmentation/
+│ │ │ ├── text/
+│ │ │ ├── code/
+│ │ │ ├── images/
+│ │ │ ├── audio/
+│ │ │ ├── videos/
+│ │ │ ├── graphs/
+
+│ │ │ │ ├── i
+│ │
+│ │ │ ├── relations.py # Relation Index
+│ │ │ ├── keywords.py # Keyword Index
+│ │ │ ├── summary.py # Summary Index
+│ │ │ ├── graph.py # Graph Index
+│ │
+│ │
+│ │ ├── documents/ # Artifacts that have been segmented nodes and indexed.
+│ │ ├── text/ # Segmented Typed up of Text Nodes
+│ │ │ ├── document.py # Abstract Document with type checking and validation from nodes.
+│ │ │ ├── markdown.py
+│ │ │ ├── html.py
+│ │ │ ├── conversation.py
+│ │
+│ │ ├── images/
+│ │ │ ├── image.py
+│ │ │ ├── screenshot.py
+│ │ │ ├── diagram.py
+│ │ │ ├── chart.py
+│ │ │ ├── map.py
+│ │ │ ├── infographic.py
+│ │ │ ├── meme.py
+│ │ │ ├── emoji.py
+│ │ │ ├── icon.py
+│ │ │ ├── logo.py
+│ │ │ ├── avatar.py
+│ │ │ ├── qrcode.py
+│ │ │ ├── barcode.py
+│ │ ├── videos/
+│ │ │ ├── video.py
+│ │ │ ├── movie.py
+│ │ │ ├── tutorial.py
+| │ │ ├── presentation.py
+| │ │ ├── animation.py
+| │ │ ├── live_stream.py
+| │ │ ├── webinar.py
+| │ │ ├── podcast.py
+| │ │ ├── music_video.py
+| │ │ ├── advertisement.py
+| │ │ ├── documentary.py
+| │ │ ├── news_report.py
+| │ │ ├── sports_video.py
+| │ │ ├── youtube.py
+| │ │ ├── instagram.py
+| │ │ ├── twitter.py
+| │ │ ├── facebook.py
+| │ │ ├── linkedin.py
+| │ │ ├── snapchat.py
+| │ │ ├── twitch.py
+| │ │ ├── vimeo.py
+| │ │ ├── giphy.py
+| │ │ ├── tiktok.py
+| │
+| │ ├── audios/
+| │
+| │ ├── signals/
+| │
+| │ ├── graph/
+| │
+| │ ├── multimodal/
+| │
+| │ │ ├── pdf.py
+| │ │ ├── pdf_form.py
+| │ │ ├── social_post.py
+| │ │ ├── tweet.py
+| │ │ ├── facebook_post.py
+| │ │ ├── linkedin_post.py
+| │ │ ├── instagram_post.py
+| │ │ ├── snapchat_story.py
+| | │ ├── twitter_thread.py
+| | │ ├── youtube_video.py
+| | │ ├── email.py
+| | │ ├── xlsx.py
+| | │ ├── csv.py
+| | │ ├── json.py
+| | │ ├── xml.py
+| | │ ├── yaml.py
+| | │ ├── toml.py
+| | │ ├── ini.py
+| | │ ├── rst.py
+| | │ ├── mdx.py
+| | │ ├── ipynb.py
+| | │ ├── epub.py
+| | │ ├── odt.py
+| | │ ├── rtf.py
+| | │ ├── txt.py
+| | │ ├── log.py
+| | │ ├── email.py
+| | │ ├── url.py
+| | │ ├── qrcode.py
+| | │ ├── barcode.py
+| | │ ├── ocr.py
+| | │ ├── models/
+│   │   ├── __init__.py
+│   │   ├── base/
+│   │   │   ├── base.py                        # Base model logic
+│   │   │   ├── baseEmbeddingModel.py          # Base for embedding models
+│   │   │   ├── baseLanguageModel.py           # Base for language models
+│   │   │   ├── baseSpeech2TextModel.py        # Base for speech-to-text models
+│   │   │   └── baseTextSpeechModel.py         # Base for text-to-speech models
+│   │   └── providers/
+│   │       ├── config.yaml                    # Provider configuration
+│   │       └── settings.py                    # Provider settings
+│   ├── prompts/
+│   │   │   ├── game_theory/
+│   │   │   ├── personas/
+│   │   │   └── planning/
+│   │   ├── centralized/
+│   │   ├── decentralized/
+│   │   ├── external/
+│   │   │   ├── llm_dp.py                      # Large language model with differential privacy
+│   │   │   ├── llm_plus_p.py                  # LLM with additional processing
+│   │   │   ├── merkle_and_mikut.py
+│   │   │   ├── rap.py
+│   │   │   └── romero_et_al.py
+│   │   ├── in-context-learning/
+│   │   │   ├── chain_of_thought.py
+│   │   │   ├── graph_of_thought.py
+│   │   │   ├── least_to_most.py
+│   │   │   ├── progressive_hint.py
+│   │   │   ├── self_consistency.py
+│   │   │   ├── self_refine.py
+│   │   │   ├── skeleton_of_thought.py
+│   │   │   └── tree_of_thought.py
+│   │   ├── multi-stage/
+│   │   │   ├── deckard.py
+│   │   │   └── swiftstage.py
+│   │   ├── reasoning/
+│   │   │   └── base.py
+│   │   ├── rethinking/
+│   │   │   ├── incontext_learning/
+│   │   │   │   ├── ReAct.py
+│   │   │   │   └── Reflexion.py
+│   │   │   └── modular_coordination/
+│   │   ├── reinforcement_learning/
+│   │   │   └── Retroformer.py
+│   │   └── supervised_learning/
+│   │       ├── CoH.py
+│   │       ├── HintingApproach.py
+│   │       ├── IntrospectiveTips.py
+│   │       ├── ProcessSupervision.py
+│
+├── schema/
+
+│
+├── test/
+│   ├── unit/
+│   │   ├── core/
+│   │   │   ├── test_agent_manager.py
+│   │   │   └── test_task_executor.py
+│   │   ├── schema/
+│   │   │   └── test_agent_schema.py
+│   │   └── api/
+│   │       ├── test_routes.py
+│   │       └── test_authentication.py
+│   ├── system/
+│   │   ├── test_integration.py
+│   │   └── test_scheduling.py
+│   ├── e2e/
+│   │   ├── test_end_to_end.py
+│   │   └── test_agent_lifecycle.py
+│   ├── type-check/
+│   │   ├── mypy.ini           # Configuration for type-checking
+│   │   └── run_mypy.sh
+│   ├── lint/
+│   │   ├── pylint.rc          # Configuration for pylint
+│   │   └── run_pylint.sh
+│   ├── audit/
+│   │   └── run_security_audit.sh
+│   └── log/
+│       ├── logging_config.py  # Configuration for logging
+│       └── log_analyzer.py    # Analyze and process log files
+│
+├── .env                       # Environment variables
+├── HELP.md
+└── README.md                  # <<You are Here>>
+
+├── core/
+│ ├── agent_manager.py # Manages the lifecycle of agents
+├── schema/
+
+├── nodes/
+├── edges/
+├── graphs/
+│ ├── triplet.py # A Node-Edge-Node Tuple
+│ ├── graph.py # Collection of Triplets
+├── agents/
+│ ├── base_agent.py
+│ ├── llm_agent.py
+│ ├── rl_agent.py
+│ ├── hybrid_agent.py
+
+│ ├── image.py # Segmented into Patches which are an implementation of a Node.
+│ ├── video.py # Segmented into Frames, which are Images
+│ ├── signal.py # Nodes of a 1D timeseries signal like audio or a CAN signal
+│ ├── audio.py # Segmented into Samples, which are timeseries signals
+│ ├── nodes.py # A segmented piece of content, like a word, image patch, or audio sample
+│ ├── multimodal.py # A collection of Nodes of different types
+│ ├── edge.py # A relationship between two nodes
+
+
+
+./core/
+├── components/
+│ ├── emergent/
+│ ├── structs/
+│ ├── agents/
+│ ├── models/
+│ ├── tools/
+
+├── data/
+│ │ ├── accessors/
+│ │ │ ├── accessor.py
+│ │ │ ├── struct_accessor.py
+│ │ │ ├── agent_accessor.py
+│ │ │ ├── model_accessor.py
+│ │ │ ├── tool_accessor.py
+│ │ │ ├── artifact_accessor.py
+│ │ │ ├── document_accessor.py
+│ │ │ ├── graph_accessor.py
+│ │ │ ├── model_accessor.py
+│ │ │ ├── prompt_accessor.py
+│ │ ├── factories/
+│ │ │ ├── selection_factories/
+│ │ │ │ ├── struct_selection_factory.py
+│ │ │ │ ├── agent_selection_factory.py
+│ │ │ │ ├── model_selection_factory.py
+│ │ │ │ ├── tool_selection_factory.py
+
+│ │ │ ├── update_factory.py
+│ │ │ └── domain_object_factory.py
+│ │ ├── assemblers/
+│ │ │ └── domain_object_assembler.py
+│ │ ├── cache/
+│ │ │ ├── cache_accessor.py
+│ │ │ ├── demand_cache.py
+│ │ │ └── primed_cache.py
+│ │ ├── concurrency/
+│ │ │ ├── transaction_manager.py
+│ │ │ ├── optimistic_lock.py
+│ │ │ └── pessimistic_lock.py
+│ │ ├── resources/
+│ │ │ ├── resource_pool.py
+│ │ │ ├── resource_timer.py
+│ │ │ └── resource_descriptor.py
+│
+├── orchestration/
+│ ├── structs         # Data structures for orchestration
+│ │ ├── swarms
+│ │ ├── hierarchical
+│ │ ├── dags
+
+
+
+
+
+
+├── services/
+│ ├── storage_service
+│ ├── model_service
+│ ├── agent_service
+│ ├── tool_service
+ex
+│ ├── agent inference
+│ ├── model inference
+│ ├── event detection
+│ ├── domain_object_serde
+
+│ ├── nlp
+│ │ ├── ocr
+│ │ ├── documents
+
+│ │ ├── tags
+
+│ │ ├── rag
+
+│ │ ├── speech
+│ │ ├── speech
+
+│ ├── ocr
+│ ├── speech
+│ ├── vision
+│ ├── audio
+
+
+│ ├── catalog/
+│ │ ├── storage.py                   # UC volumes with support for connections to user's 3rd party storage providers (S3, GCS, Azure, HDFS, NFS, G Drive, One Drive, Dropbox, Box,)
+│ │ ├── tables.py                    # UC tables. Natively Iceberg ORC or Parquet Tables.
+│ │ ├── memory.py                    # UC (Vector DBs, LLM Cache,)
+│ │ ├── graphs.py                    # UC docstore (GraphDB, DocDB,)
+│ │ ├── models.py                    # Model Registry in ML Flow indexed in UC
+│ │ ├── experiments.py               # Experiments and Runs with Parameters and Metrics
+│ │ ├── agents.py                    # Agent Registry
+│ │ ├── tools.py                     # Tool Registry (Python/SQL)
+│ │ ├── swarms.py                    # Orchestration Structures Registry
+│ │ ├── prompts.py                   # Prompt Registry
+│ │ └── artifacts.py                 # Artifact Registry
+
+
+
+│ │ ├── task_scheduler.py
+│ │ ├── agent_coordinator.py
+│ │ └── data_flow_manager.py
+│ └── auth/
+
+
+│ ├── swarms/ (Orchestration)
+│ ├── agents/
+│ ├── models/
+│ ├── tools/
+
+
+
+├── orchestration/
+│ ├── task_scheduler.py
+│ ├── agent_coordinator.py
+│ └── data_flow_manager.py
+└── auth/
+├── account.py
+├── team.py
+├── user.py
+└── iam_manager.py
+
+
