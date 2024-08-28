@@ -1,0 +1,204 @@
+openapi: 3.0.0
+info:
+  title: ChatApp API
+  version: 1.0.0
+  description: API for managing chat messages and sessions
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+paths:
+  /messages:
+    get:
+      summary: Get all messages
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+    post:
+      summary: Create a new message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageCreate'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: string
+                description: ID of the created message
+
+  /messages/{message_id}:
+    get:
+      summary: Get a specific message
+      parameters:
+        - in: path
+          name: message_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Message not found
+    put:
+      summary: Update a message
+      parameters:
+        - in: path
+          name: message_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageUpdate'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Message not found
+    delete:
+      summary: Delete a message
+      parameters:
+        - in: path
+          name: message_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '404':
+          description: Message not found
+
+  /save:
+    post:
+      summary: Save the current chat session
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Confirmation message
+
+  /load/{chat_id}:
+    post:
+      summary: Load a chat session
+      parameters:
+        - in: path
+          name: chat_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Confirmation message
+
+  /analytics/{query}:
+    get:
+      summary: Run analytics on the chat data
+      parameters:
+        - in: path
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+components:
+  schemas:
+    MessageBase:
+      type: object
+      required:
+        - content
+        - role
+      properties:
+        content:
+          type: string
+        role:
+          type: string
+        user_id:
+          type: string
+        agent_id:
+          type: string
+        model_id:
+          type: string
+
+    MessageCreate:
+      allOf:
+        - $ref: '#/components/schemas/MessageBase'
+
+    MessageUpdate:
+      allOf:
+        - $ref: '#/components/schemas/MessageBase'
+        - type: object
+          properties:
+            edit_note:
+              type: string
+
+    Message:
+      allOf:
+        - $ref: '#/components/schemas/MessageBase'
+        - type: object
+          required:
+            - id
+            - timestamp
+            - version
+          properties:
+            id:
+              type: string
+            timestamp:
+              type: string
+              format: date-time
+            version:
+              type: integer
+            edit_history:
+              type: array
+              items:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                  edit_note:
+                    type: string
