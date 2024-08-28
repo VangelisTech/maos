@@ -1,5 +1,6 @@
 python@3.11
 fastapi
+starlette
 uvicorn
 sqlalchemy
 pydantic
@@ -15,3 +16,6 @@ ray
 pyarrow
 getdaft
 lancedb
+openai
+mlflow
+transformers
