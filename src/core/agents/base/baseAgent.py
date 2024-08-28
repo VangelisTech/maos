@@ -23,7 +23,7 @@ class Agent(DomainObject):
     """
     def __init__(self):
         name: Optional[str] = Field(
-            default_factory=f"Agent {self.id}",
+            ...,
             description="The name of the agent", 
         ),
         status: AgentStatus = Field(
@@ -35,7 +35,7 @@ class Agent(DomainObject):
             description="The Multimodal Model"
         ),
         reasoning: Optional[DeploymentHandle] = Field(
-            default=MultiModalLLM(),
+            ...,
             description="The embedding model"
         ),
         memory: Optional[DeploymentHandle] = Field(
@@ -43,7 +43,7 @@ class Agent(DomainObject):
             description="The embedding model",
         ),
         embedding: Optional[DeploymentHandle] = Field(
-            default=MultiModalEmbedding(),
+            default=MMEmbedding(),
             description="The embedding model"
         ),
         tools: Optional[List[BaseTool]] = Field(
@@ -51,7 +51,7 @@ class Agent(DomainObject):
             description="The tools that the agent can use"
         ),
     ):
-        super().__init__(metadata=)
+        super().__init__()
         self.name =  name
         self.models = models
         self.reasoning = reasoning
@@ -64,32 +64,22 @@ class Agent(DomainObject):
 
 
 def __call__(self, request: Request, task: Task):
-    prompt = Request.Prompt
+    prompt = Request.prompt
     response = self.llm.complete(prompt)
     return response
 
-    strategies = get_reasoning(task)
-
-    query = get_query(prompt, strategies)
-    get_context()
-
-    model_response: DeploymentResponse = self.llm.remote(prompt)
-    # Pass the adder response directly into the multipler (no `await` needed).
-    multiplier_response: DeploymentResponse = self._multiplier.remote(
-        adder_response
-    )
-    # `await` the final chained response.
-    return await multiplier_response
-    def register(self):
-        unity.tables('data.agents')
+    
+    
+def register(self):
+    unity.tables('data.agents')
 
 
-    def execute_task(self, Task) -> Result:
-        self.status = "Running"
-        self.status = "Running"
-        self.logger.info(f"{timestamp.utc(now)}Agent {self.name} started task {Task.name} [{Task.id}]")
+def execute_task(self, Task) -> Result:
+    self.status = "Running"
+    self.status = "Running"
+    self.logger.info(f"{timestamp.utc(now)}Agent {self.name} started task {Task.name} [{Task.id}]")
 
-        return result
+    return result
 
 
 def get_status(self) -> AgentStatus:
@@ -101,5 +91,4 @@ def get_tools(self) -> List[BaseTool]:
 
 
 def select_tool(self, tools, criteria, strategy):
-
         print(self.tools)
