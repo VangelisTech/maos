@@ -1,39 +1,6 @@
 # MAOS 
 ### Multi-Agent Orchestration System
 
-MAOS is a sophisticated AI-Native framework for composing agentic systems from authoritative reference sources. 
-
-### References
-Programming & Design Patterns
-1. Refactoring Guru - Design Patterns ![https://refactoring.guru/design-patterns]
-
-Canonical References Sources
-Artificial Intelligence, A Modern Approach [https://aima.cs.berkeley.edu/index.html]
-
-Architecture
-
-```mermaid
-
-```
-
-Dependencies include: 
-typing
-pyarrow
-ray
-getdaft
-lancedb
-
-Compose agentic systems with an intutive api:
-
-
-###Installation
-```bash
-pip install maos
-```
-
-## Modules
-### DATA
-### MODELS
-### TOOLS
-### SYSTEMS
+Purpose
+MAOS is designed to help researchers and developers characterize arbitrary networks of agent systems. By combining flexible tooling (e.g., Ray for distributed computing, NetworkX for graph modeling, and other open-source libraries), M.A.O.S. enables users to experiment and simulate agent interactions at scale. This allows for rapid prototyping, benchmarking, and analysis of multi-agent scenarios in diverse domains—providing an extensible foundation for AI-native solutions and cutting-edge research.
 
